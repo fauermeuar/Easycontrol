@@ -1,4 +1,3 @@
-
 # Nama workflow yang akan tampil di tab "Actions"
 name: Build Android Debug APK
 
@@ -35,10 +34,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Langkah 4: Menjalankan perintah untuk membuat APK versi Debug
-      # Versi Debug sangat ideal untuk testing dan tidak memerlukan signing key.
-      - name: Assemble Debug Build
-        run: ./gradlew assembleDebug
+      # Langkah 4: Menjalankan perintah untuk membuat APK (SUDAH DIMODIFIKASI)
+      # Urutan ini spesifik untuk proyek easycontrolfork.
+      - name: Build Project with Server-App Steps
+        run: |
+          ./gradlew assembleDebug -p server
+          ./gradlew copyDebug -p server
+          ./gradlew assembleDebug
 
       # Langkah 5: Mengunggah file APK yang sudah jadi sebagai "Artifact"
       # Artifact adalah file hasil proses yang bisa di-download.
